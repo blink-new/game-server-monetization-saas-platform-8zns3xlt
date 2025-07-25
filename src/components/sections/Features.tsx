@@ -1,78 +1,65 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { 
-  Shield, 
-  CreditCard, 
-  Code, 
-  Globe, 
-  BarChart3, 
-  Webhook,
-  Key,
-  Gamepad2,
-  Lock
-} from 'lucide-react'
 import { motion } from 'framer-motion'
+import { ShoppingCart, CreditCard, RefreshCw, Shield, TrendingUp, Globe } from 'lucide-react'
 
-export function Features() {
-  const features = [
+export default function Features() {
+  const products = [
     {
-      icon: Shield,
-      title: 'Enterprise Security',
-      description: 'JWT authentication, API key validation, and encrypted server communication with code signing protection.',
-      color: 'text-blue-600'
+      icon: ShoppingCart,
+      title: 'In-Game or Web Stores',
+      description: 'Sell items, subscriptions, season passes, and DLCs from a webstore or an in-game customized shop using our API',
+      color: 'text-blue-600 dark:text-blue-400'
     },
     {
       icon: CreditCard,
-      title: 'Payment Processing',
-      description: 'Integrated Stripe & PayPal support with subscription management and one-time purchases.',
-      color: 'text-green-600'
+      title: 'Checkout',
+      description: 'Allow players to pay using PayPal, Credit Card, Paysafecard, and 130 local payment methods',
+      color: 'text-green-600 dark:text-green-400'
     },
     {
-      icon: Code,
-      title: 'Developer API',
-      description: 'RESTful API with rate limiting, comprehensive documentation, and webhook delivery system.',
-      color: 'text-purple-600'
+      icon: RefreshCw,
+      title: 'Sales Tax & Compliance',
+      description: 'Tebex handles all customer billing-related support. We also collect and remit local and worldwide sales taxes',
+      color: 'text-purple-600 dark:text-purple-400'
     },
     {
-      icon: Globe,
-      title: 'Custom Store Hosting',
-      description: 'Branded subdomains, custom domains, and fully customizable store templates.',
-      color: 'text-orange-600'
+      icon: Shield,
+      title: 'Fraud Protection',
+      description: 'We handle all chargebacks and fraud detection, respond to disputes on your behalf, and provide 100% insurance',
+      color: 'text-red-600 dark:text-red-400'
+    }
+  ]
+
+  const benefits = [
+    {
+      title: 'Global Compliance',
+      description: 'Tebex is responsible for all worldwide taxes and handles billing-related support on behalf of your customers'
     },
     {
-      icon: Gamepad2,
-      title: 'Multi-Game Support',
-      description: 'Native integrations for FiveM, Minecraft, Rust, and other popular multiplayer games.',
-      color: 'text-red-600'
+      title: 'Instant Withdrawals',
+      description: 'Instantly withdraw funds directly to your bank account or PayPal'
     },
     {
-      icon: BarChart3,
-      title: 'Analytics Dashboard',
-      description: 'Real-time order tracking, revenue analytics, and comprehensive business insights.',
-      color: 'text-indigo-600'
+      title: 'Your Merchant of Record',
+      description: 'We build and maintain relationships with 100+ major and local payment methods worldwide'
     },
     {
-      icon: Webhook,
-      title: 'Webhook System',
-      description: 'Automated in-game delivery with secure webhook endpoints and retry mechanisms.',
-      color: 'text-teal-600'
+      title: 'Robust and Customizable',
+      description: 'Enjoy a fully customizable in-game store layout and a robust infrastructure (99.99% uptime)'
     },
     {
-      icon: Key,
-      title: 'API Key Management',
-      description: 'Secure API key generation, validation, and management with granular permissions.',
-      color: 'text-yellow-600'
+      title: 'Monetize in Minutes',
+      description: 'Easily create an in-game shop to sell passes, subscriptions, items, DLCs, cosmetics, and more'
     },
     {
-      icon: Lock,
-      title: 'Script Protection',
-      description: 'Code signing and obfuscation for downloadable scripts with anti-piracy measures.',
-      color: 'text-pink-600'
+      title: 'Stable and Experienced',
+      description: 'With 12+ years of experience and $150M raised from top investors, we\'re here to stay'
     }
   ]
 
   return (
-    <section id="features" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20 bg-white dark:bg-slate-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Products & Solutions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -80,40 +67,77 @@ export function Features() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Everything You Need to{' '}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Succeed
-            </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Products & Solutions
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Built for game server owners who demand enterprise-grade security, 
-            seamless integrations, and powerful monetization tools.
-          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+          {products.map((product, index) => (
             <motion.div
-              key={feature.title}
+              key={product.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
+              className="bg-gray-50 dark:bg-slate-800 rounded-xl p-6 hover:shadow-lg transition-shadow"
             >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300 border-border/50">
-                <CardHeader>
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-4`}>
-                    <feature.icon className={`h-6 w-6 ${feature.color}`} />
-                  </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base leading-relaxed">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
+              <product.icon className={`w-12 h-12 ${product.color} mb-4`} />
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                {product.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                {product.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">
+            Maximize Your Gaming Revenue
+          </h2>
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+            Get Started
+          </button>
+        </motion.div>
+
+        {/* Why Tebex */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Why GameStore Pro?
+          </h2>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {benefits.map((benefit, index) => (
+            <motion.div
+              key={benefit.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+                {benefit.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                {benefit.description}
+              </p>
             </motion.div>
           ))}
         </div>

@@ -1,44 +1,44 @@
 import { useState, useEffect } from 'react'
-import { Navbar } from '@/components/layout/Navbar'
-import { Hero } from '@/components/sections/Hero'
-import { Features } from '@/components/sections/Features'
-import { Pricing } from '@/components/sections/Pricing'
-import { SupportedGames } from '@/components/sections/SupportedGames'
-import { Footer } from '@/components/sections/Footer'
+import { createClient } from '@/blink/client'
+import Navbar from '@/components/layout/Navbar'
+import Hero from '@/components/sections/Hero'
+import TrustedBy from '@/components/sections/TrustedBy'
+import Features from '@/components/sections/Features'
+import Investors from '@/components/sections/Investors'
+import Help from '@/components/sections/Help'
+import Footer from '@/components/sections/Footer'
+
+const blink = createClient()
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false)
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Check for saved theme preference or default to light mode
-    const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      setDarkMode(true)
-      document.documentElement.classList.add('dark')
-    }
+    const unsubscribe = blink.auth.onAuthStateChanged((state) => {
+      setUser(state.user)
+      setLoading(state.isLoading)
+    })
+    return unsubscribe
   }, [])
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-    if (!darkMode) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
-    }
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-slate-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    )
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+    <div className="min-h-screen bg-white dark:bg-slate-900">
+      <Navbar user={user} />
       <main>
         <Hero />
+        <TrustedBy />
         <Features />
-        <SupportedGames />
-        <Pricing />
+        <Investors />
+        <Help />
       </main>
       <Footer />
     </div>

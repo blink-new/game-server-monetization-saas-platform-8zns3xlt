@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Github, Twitter, MessageCircle } from 'lucide-react'
 
-export function Footer() {
+export default function Footer() {
   const footerSections = [
     {
       title: 'Product',
